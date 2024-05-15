@@ -7,7 +7,7 @@ axios.defaults.baseURL = "https://api.themoviedb.org";
 const options = {
   headers: {
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MzZiZDU1NzUyMWM2ZDEwZjE0MWI2YzZiNDUzMzVmNyIsInN1YiI6IjY2NDQ3NDczMGMxOGZhZDM4NDI0MWJmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0rrItNhd_rpqSU64nIarPcRXrJpWR1t0C8RZ6eV2VIE",
+      
   },
 };
 
