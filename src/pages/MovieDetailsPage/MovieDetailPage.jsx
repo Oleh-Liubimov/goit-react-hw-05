@@ -1,27 +1,32 @@
 import { useEffect, useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { fetchMovieDetails } from "../../api-request";
 
 export default function MovieDetailPage() {
-    const movie = useLoaderData();
-    
+  const { movieId } = useParams();
+  console.log(movieId);
 
-    const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+  console.log(movie);
 
-    
-
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const data = await fetchMovieDetails(movieId);
+        setMovie(...data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchDetails();
+  }, [movieId]);
 
   return (
     <div>
-      {movie.title}
+      <h2>{movie.title}</h2>
+      <p>{movie.overview}</p>
       <Outlet />
     </div>
   );
-}
-
-
-export const movieDetailsLoader = ({params}) => {
-    const data = fetchMovieDetails(params.movieId)
-    return data
 }

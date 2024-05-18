@@ -1,7 +1,6 @@
 import MovieList from "../../components/MovieList/MovieList"
-import { fetchMovieDetails, fetchTrendingMovies } from "../../api-request"
+import { fetchTrendingMovies } from "../../api-request"
 import { useEffect,useState} from "react"
-import { useParams } from "react-router-dom";
 
 function HomePage() {
     const [films, setFilms] = useState([]);
@@ -9,10 +8,6 @@ function HomePage() {
     console.log(movieId);
     
 
-
-    
-
-    
     useEffect(() => {
         const fetchData = async () => {
             try {
