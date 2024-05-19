@@ -14,8 +14,7 @@ function App() {
 
   return (
     <div className="">
-      <Navigation />
-
+      
       <Suspense>
         <Routes>
           <Route path="/" element={<HomePage />} />

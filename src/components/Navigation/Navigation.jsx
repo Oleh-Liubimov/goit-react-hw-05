@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 import { BiSolidCameraMovie } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 
 
 
-function Navigation() {
+function Navigation({children}) {
   return (
-    <header className="bg-yellow-100 flex gap-5 border-b-2 border-black shadow-xl items-center p-5">
+    <header className="bg-yellow-100 flex gap-5 border-b-2 border-black shadow-xl items-center py-3 px-5">
       <BiSolidCameraMovie size="36px" />
       <nav className="flex gap-5">
         <NavLink
@@ -29,6 +30,7 @@ function Navigation() {
           Movies
         </NavLink>
       </nav>
+      {children}
     </header>
   );
 }

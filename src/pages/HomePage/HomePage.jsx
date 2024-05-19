@@ -1,33 +1,41 @@
-import MovieList from "../../components/MovieList/MovieList"
-import { fetchTrendingMovies } from "../../api-request"
-import { useEffect,useState} from "react"
+import MovieList from "../../components/MovieList/MovieList";
+import Navigation from "../../components/Navigation/Navigation";
+import { fetchTrendingMovies } from "../../api-request";
+import { useEffect, useState } from "react";
 
 function HomePage() {
-    const [films, setFilms] = useState([]);
-    const [movieId, setMovieId] = useState(0)
-    console.log(movieId);
-    
+  const [films, setFilms] = useState(() => {
+      const savedFilms = localStorage.getItem("films");
+    return savedFilms ? JSON.parse(savedFilms) : [];
+  });
+  const [movieId, setMovieId] = useState(0);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setFilms([])
-                const response = await fetchTrendingMovies();
-                setFilms(response.data.results);
-                setMovieId(response.data.results.id);
-            } catch (error) {
-                console.error();
-            }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setFilms([]);
+        if (!films) {
+          const response = await fetchTrendingMovies();
+          localStorage.setItem("films", JSON.stringify(response.data.results));
+          setFilms(response.data.results);
 
+          setMovieId(response.data.results.id);
+        } else {
+          return;
         }
-        fetchData()
-    },[])
+      } catch (error) {
+        console.error();
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
-      <main>
-          <MovieList data={films} onDetails={setMovieId} />
+    <main>
+      <Navigation />
+      <MovieList data={films} onDetails={setMovieId} />
     </main>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

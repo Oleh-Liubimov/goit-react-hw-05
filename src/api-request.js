@@ -22,3 +22,8 @@ export function fetchMovieDetails(id) {
   const res = axios.get(`movie/${id}`, options);
   return res
 }
+
+export function fetchMovieOnQuery(query) {
+  const res = axios.get(`/search/movie?query=${query}&include_adult=false`,options);
+  return res
+}

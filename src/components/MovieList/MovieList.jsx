@@ -4,7 +4,7 @@ import MovieCard from "../MovieCard/MovieCard";
 export default function MovieList({data, onDetails}) {
     return (
       <ul className="flex flex-wrap justify-center gap-4 p-8">
-        {data.map((film) => (
+        { data && data.map((film) => (
           <li key={film.id}>
             <MovieCard filmData={film} onDetails={onDetails} />
           </li>
