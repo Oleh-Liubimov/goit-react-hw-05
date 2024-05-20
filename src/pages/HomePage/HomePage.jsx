@@ -4,31 +4,24 @@ import { fetchTrendingMovies } from "../../api-request";
 import { useEffect, useState } from "react";
 
 function HomePage() {
-  const [films, setFilms] = useState(() => {
-      const savedFilms = localStorage.getItem("films");
-    return savedFilms ? JSON.parse(savedFilms) : [];
-  });
-  const [movieId, setMovieId] = useState(0);
+  const [films, setFilms] = useState([]);
+    const [movieId, setMovieId] = useState(0);
+    const [page, setPage] = useState(1)
+    
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchData = async () => {
       try {
         setFilms([]);
-        if (!films) {
           const response = await fetchTrendingMovies();
-          localStorage.setItem("films", JSON.stringify(response.data.results));
           setFilms(response.data.results);
-
           setMovieId(response.data.results.id);
-        } else {
-          return;
-        }
       } catch (error) {
         console.error();
       }
     };
-    fetchData();
-  }, []);
+    if(films.length === 0) fetchData();
+  }, [films]);
 
   return (
     <main>

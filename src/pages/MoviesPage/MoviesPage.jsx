@@ -10,12 +10,20 @@ import { useSearchParams } from "react-router-dom";
 
 function MoviesPage() {
 
-  const [searchQuery, setSearchQuery] = useState("");
+  
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("query")
+  const [searchQuery, setSearchQuery] = useState(query || "");
 
-  // console.log(searchQuery);
+
+  console.log(searchQuery);
   // console.log(films);
+
+  function updateQuery(query) {
+    const nextQuery = query !== "" ? { query } : {}
+    setSearchParams(nextQuery)
+  }
 
 
  function handleSubmit(values,actions) {
@@ -37,7 +45,7 @@ function MoviesPage() {
   return (
     <div>
       <Navigation>
-        <SearchBar onSubmit={handleSubmit} onChange={setSearchParams} />
+        <SearchBar onSubmit={handleSubmit} onChange={updateQuery} />
       </Navigation>
       <MovieList data={films} />
     </div>
