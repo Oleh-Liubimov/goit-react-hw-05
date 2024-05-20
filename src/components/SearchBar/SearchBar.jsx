@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Field, Form, Formik } from "formik";
 
-export default function SearchBar({ onSubmit, onChange }) {
+export default function SearchBar({ onSubmit}) {
 
     
   return (
@@ -9,7 +9,6 @@ export default function SearchBar({ onSubmit, onChange }) {
       <Form className="w-full">
         <Field
           type="text"
-                  onChange={(e) =>onChange(e.target.value)}
           name="search"
           className="mx-8 w-1/4 border p-1 outline-none font-mono rounded focus:border-2  border-black"
         />

@@ -4,9 +4,13 @@ import { fetchTrendingMovies } from "../../api-request";
 import { useEffect, useState } from "react";
 
 function HomePage() {
-  const [films, setFilms] = useState([]);
+    const [films, setFilms] = useState(() => {
+        const savedFilms = localStorage.getItem("saved films")
+        return savedFilms ? JSON.parse(savedFilms) : ([])
+  });
     const [movieId, setMovieId] = useState(0);
-    const [page, setPage] = useState(1)
+  const [page, setPage] = useState(1)
+  
     
 
     useEffect(() => {
@@ -14,6 +18,10 @@ function HomePage() {
       try {
         setFilms([]);
           const response = await fetchTrendingMovies();
+          localStorage.setItem(
+            "saved films",
+            JSON.stringify(response.data.results)
+          );
           setFilms(response.data.results);
           setMovieId(response.data.results.id);
       } catch (error) {

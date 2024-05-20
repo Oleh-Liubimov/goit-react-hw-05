@@ -8,48 +8,40 @@ import { useSearchParams } from "react-router-dom";
 
 
 
-function MoviesPage() {
+export default function MoviesPage() {
 
   
   const [films, setFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("query")
-  const [searchQuery, setSearchQuery] = useState(query || "");
+  const query = searchParams.get("query") || ""
 
 
-  console.log(searchQuery);
-  // console.log(films);
-
-  function updateQuery(query) {
-    const nextQuery = query !== "" ? { query } : {}
-    setSearchParams(nextQuery)
-  }
-
+  
 
  function handleSubmit(values,actions) {
-   setSearchQuery(values.search)
+   const nextQuery = values.search !== "" ? { query:values.search } : {};
+   setSearchParams(nextQuery);
    actions.resetForm();
   }
 
   useEffect(() => {
-    if (!searchQuery) return;
+    if (!query) return;
     setFilms([]);
     async function getMovies() {
-      const data = await fetchMovieOnQuery(searchQuery);
+      const data = await fetchMovieOnQuery(query);
       setFilms(data.data.results);
     }
     getMovies();
-  }, [searchQuery]);
+  }, [query]);
 
 
   return (
     <div>
       <Navigation>
-        <SearchBar onSubmit={handleSubmit} onChange={updateQuery} />
+        <SearchBar onSubmit={handleSubmit} onChange={handleSubmit} />
       </Navigation>
       <MovieList data={films} />
     </div>
   );
 }
 
-export default MoviesPage
