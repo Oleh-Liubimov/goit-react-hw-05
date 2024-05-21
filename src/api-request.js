@@ -29,6 +29,11 @@ export function fetchMovieOnQuery(query) {
 }
 
 export function fetchMovieCast(id) {
-  const res = axios.get(`movie/${id}/credits`);
+  const res = axios.get(`movie/${id}/credits`, options);
+  return res
+}
+
+export function fetchMovieReviews(id) {
+  const res = axios(`movie/${id}/reviews`, options);
   return res
 }

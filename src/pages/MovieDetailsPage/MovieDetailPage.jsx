@@ -10,6 +10,9 @@ export default function MovieDetailPage() {
   const [movie, setMovie] = useState([]);
   const location = useLocation();
   const backLinkHref = location.state ?? "/movies";
+const defaultImg =
+  "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
+  
 
 
   useEffect(() => {
@@ -28,11 +31,11 @@ export default function MovieDetailPage() {
     <div>
       <Navigation />
       <div className="p-5">
-        <BackLink to={backLinkHref}>Back to movies</BackLink>
+        <BackLink to={backLinkHref}>Go back</BackLink>
         <div className="flex items-center gap-5">
           <div className="w-1/4">
             <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : defaultImg}
               alt=""
               className="w-full h-auto"
             />
@@ -55,9 +58,19 @@ export default function MovieDetailPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
-          <Link to={"cast"}>See movie cast</Link>
-          <Link to={"reviews"}>See movie review</Link>
+        <div className="flex gap-3 mt-5">
+          <Link
+            to={"cast"}
+            className="p-3 bg-orange-300 rounded hover:bg-orange-400"
+          >
+            See movie cast
+          </Link>
+          <Link
+            to={"reviews"}
+            className="p-3 bg-orange-300 rounded hover:bg-orange-400"
+          >
+            See movie review
+          </Link>
         </div>
         <Outlet />
       </div>
