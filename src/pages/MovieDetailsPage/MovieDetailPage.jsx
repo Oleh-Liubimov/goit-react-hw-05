@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { fetchMovieDetails } from "../../api-request";
@@ -9,7 +9,7 @@ export default function MovieDetailPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const location = useLocation();
-  const backLinkHref = location.state ?? "/movies";
+  const backLinkHref = useRef(location.state ?? "/movies");
 const defaultImg =
   "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
   
@@ -31,7 +31,7 @@ const defaultImg =
     <div>
       <Navigation />
       <div className="p-5">
-        <BackLink to={backLinkHref}>Go back</BackLink>
+        <BackLink to={backLinkHref.current}>Go back</BackLink>
         <div className="flex items-center gap-5">
           <div className="w-1/4">
             <img

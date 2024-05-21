@@ -5,7 +5,7 @@ export default function SearchBar({ onSubmit}) {
 
     
   return (
-    <Formik initialValues={{ text: "" }} onSubmit={onSubmit}>
+    <Formik initialValues={{ search: "" }} onSubmit={onSubmit}>
       <Form className="w-full">
         <Field
           type="text"

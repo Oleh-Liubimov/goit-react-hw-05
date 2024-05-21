@@ -11,11 +11,7 @@ function MovieCard({ filmData }) {
   return (
     <div className="max-w-60 cursor-pointer hover:scale-105">
       <Link
-        to={
-          location.pathname === "/movies"
-            ? `${filmData.id}`
-            : `/movies/${filmData.id}`
-        }
+        to={`/movies/${filmData.id}`}
         state={location}
       >
         <img
